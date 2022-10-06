@@ -30,7 +30,7 @@ are now `0xff/0xfY` (where Y is defined by `--preferred-bg Y` or defaults to 1).
 
 This software is distributed under the MIT license, unless stated otherwise.
 
-See COPYING file.
+See [COPYING](https://gitlab.com/pvmm/png2tiles.py/-/blob/main/COPYING) file.
 
 **TL;DR**: the only condition is that you are required to preserve the copyright
 and license notices. Licensed works, modifications, and larger works may be
@@ -41,4 +41,4 @@ This is a spin-off of `png2tiles.py` tool from the
 [ubox MSX lib](https://gitlab.com/reidrac/ubox-msx-lib), which is also MIT licensed.
 
 Some of the contents and structure of this README.md were shamelessly copied from
-ubox's README.md.
+ubox's [README.md](https://gitlab.com/reidrac/ubox-msx-lib/-/blob/main/README.md).
