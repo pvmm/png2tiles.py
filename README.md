@@ -15,16 +15,16 @@ background colour position.
 
 * if the 8x1 block has a single colour (white for instance), `--preferred-bg X`
 will set the background to X, which means that pixels/colours of the block are now
-0xff/0xfX. And in case of `--preferred-bg 15`, pixels/colours values of the block
-are now 0x00/0xYf (where Y is defined by `--preferred-fg Y` or defaults to 1).
+`0xff/0xfX`. And in case of `--preferred-bg 15`, pixels/colours values of the block
+are now `0x00/0xYf` (where Y is defined by `--preferred-fg Y` or defaults to 1).
 
 * if the 8x1 block has a single colour (white for instance), `--preferred-fg X`
 will set the foreground to X, which means that pixels/colours of the block are now
-0x00/0xXf. And in case of `--preferred-fg 15`, pixels/colours values of the block
-are now 0xff/0xfY (where Y is defined by `--preferred-bg Y` or defaults to 1).
+`0x00/0xXf`. And in case of `--preferred-fg 15`, pixels/colours values of the block
+are now `0xff/0xfY` (where Y is defined by `--preferred-bg Y` or defaults to 1).
 
 * `--preferred-bg X` has precedence over `--preferred-fg Y`, so in a Z-coloured
-8x1 block, pixels/colour of the block are set to 0xff/0xZX instead of 0x00/0xYZ.
+8x1 block, pixels/colour of the block are set to `0xff/0xZX` instead of `0x00/0xYZ`.
 
 ## Copying
 
