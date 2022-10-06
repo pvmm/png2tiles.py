@@ -5,11 +5,11 @@ compared to the [ubox MSX lib](https://gitlab.com/reidrac/ubox-msx-lib) version.
 
 Introduced `--preferred-bg` and `--preferred-fg` options with the following rules:
 
-* If a 8x1 block (8 pixels aligned) contains color X, `--prefered-fg X` will set X
+* If a 8x1 block (8 pixels aligned) contains color X, `--preferred-fg X` will set X
 as the MSN (most significant nibble) in the respective colour byte, which is the
 foreground colour position.
 
-* If a 8x1 block (8 pixels aligned) contains color X, `--prefered-bg X` will set X
+* If a 8x1 block (8 pixels aligned) contains color X, `--preferred-bg X` will set X
 as the LSN (least significant nibble) in the respective colour byte, which is the
 background colour position.
 
