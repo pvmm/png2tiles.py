@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 #
 # Copyright (C) 2019 by Juan J. Martinez <jjm@usebox.net>
+#               2022 by Pedro de Medeiros <pedro.medeiros@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
