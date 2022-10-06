@@ -51,6 +51,9 @@ MSX_COLS = [
     (238, 238, 238),
 ]
 
+preferred_fg = -1
+preferred_bg = -1
+
 
 def to_hex_list_str(src):
     out = ""
@@ -94,7 +97,7 @@ def read_image(image_name, out, color):
                 data[x + i + ((y + j) * w)] for j in range(DEF_H) for i in range(DEF_W)
             ]
 
-            # get the attibutes of the tile
+            # get the attributes of the tile
             # FIXME: this may not be right
             for i in range(0, len(tile), DEF_W):
                 cols = list(sorted(set(tile[i : i + DEF_W])))
@@ -105,7 +108,44 @@ def read_image(image_name, out, color):
                         % (ntiles, x, y, cols)
                     )
                 elif len(cols) == 1:
-                    cols.append(MSX_COLS[1])
+                    if preferred_bg == MSX_COLS.index(cols[0]):
+                        if preferred_fg != -1:
+                            cols.append(MSX_COLS[preferred_fg])
+                        else:
+                            cols.append(MSX_COLS[1])
+                    elif preferred_fg == MSX_COLS.index(cols[0]):
+                        if preferred_bg != -1:
+                            cols.insert(0, MSX_COLS[preferred_bg])
+                        else:
+                            cols.insert(0, MSX_COLS[1])
+                    elif preferred_bg != -1:
+                        cols.insert(0, MSX_COLS[preferred_bg])
+                    elif preferred_fg != -1:
+                        cols.append(MSX_COLS[preferred_fg])
+                    else:
+                        cols.append(MSX_COLS[1])
+
+                current_idx = [MSX_COLS.index(cols[0]), MSX_COLS.index(cols[1])]
+
+                if preferred_bg in current_idx:
+                    bg = preferred_bg
+                    # swap colours if necessary
+                    if preferred_bg != current_idx[0]:
+                        cols[0], cols[1] = cols[1], cols[0]
+                        fg = current_idx[0]
+                    else:
+                        fg = current_idx[1]
+                elif preferred_fg in current_idx:
+                    fg = preferred_fg
+                    # swap colours if necessary
+                    if preferred_fg != current_idx[1]:
+                        cols[0], cols[1] = cols[1], cols[0]
+                        bg = current_idx[1]
+                    else:
+                        bg = current_idx[0]
+                else:
+                    bg = current_idx[0]
+                    fg = current_idx[1]
 
                 for c in cols:
                     if c not in MSX_COLS:
@@ -117,7 +157,7 @@ def read_image(image_name, out, color):
 
                 # each tile has two color attributes per row
                 color_idx[ntiles * DEF_H + i // DEF_W] = cols
-                color.append((MSX_COLS.index(cols[1]) << 4) | MSX_COLS.index(cols[0]))
+                color.append((fg << 4) | bg)
 
             frame = []
             for i in range(0, len(tile), 8):
@@ -139,6 +179,8 @@ def read_image(image_name, out, color):
 
 
 def main():
+    global preferred_bg
+    global preferred_fg
 
     parser = ArgumentParser(
         description="PNG to MSX tiles",
@@ -169,20 +211,32 @@ def main():
         action="store_true",
         help="don't include colors",
     )
+    parser.add_argument(
+        "--preferred-bg",
+        dest="preferred_bg",
+        default=-1,
+        type=int,
+        help="define a color as background preferably",
+    )
+    parser.add_argument(
+        "--preferred-fg",
+        dest="preferred_fg",
+        default=-1,
+        type=int,
+        help="define a color as foreground preferably",
+    )
 
     parser.add_argument("image", nargs="+", help="image or images to convert")
 
     args = parser.parse_args()
 
+    preferred_bg = args.preferred_bg
+    preferred_fg = args.preferred_fg
     color = []
     out = []
     ntiles = 0
     for image_name in args.image:
-        try:
-            ntiles += read_image(image_name, out, color)
-        except Exception as e:
-            parser.error(e)
-
+        ntiles += read_image(image_name, out, color)
         if ntiles > 256:
             parser.error("more than 256 tiles")
 
