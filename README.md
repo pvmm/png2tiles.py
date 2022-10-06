@@ -1,6 +1,6 @@
 # png2tiles.py
 
-This is a new version of `pn2tiles.py` that changes functionality considerably when
+This is a new version of `png2tiles.py` that changes functionality considerably when
 compared to the [ubox MSX lib](https://gitlab.com/reidrac/ubox-msx-lib) version.
 
 Introduced `--preferred-bg` and `--preferred-fg` options with the following rules:
