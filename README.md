@@ -26,6 +26,12 @@ are now `0xff/0xfY` (where Y is defined by `--preferred-bg Y` or defaults to 1).
 * `--preferred-bg X` has precedence over `--preferred-fg Y`, so in a Z-coloured
 8x1 block, pixels/colour of the block are set to `0xff/0xZX` instead of `0x00/0xYZ`.
 
+ubox version of `map.py` is also bundled, but with some subtle changes. This version
+may ignore completely the presence of the entity layer if you provide `--max-ents -1`
+and the `--transpose` parameter can encode the map in a transposed matrix layout in
+memory.
+
+
 ## Copying
 
 This software is distributed under the MIT license, unless stated otherwise.
