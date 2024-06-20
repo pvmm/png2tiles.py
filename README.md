@@ -1,3 +1,30 @@
+# png2sc5.py
+
+This is a new version of `png2scr.py` that converts image to SCREEN 5 (MSX2). Here
+is the help message:
+```
+usage: png2sc5.py [-h] [--version] [-i ID] [-p PALETTE] [-a] [--aplib] [-z] image
+
+PNG to SCREEN5
+
+positional arguments:
+  image                 image to convert
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  -i ID, --id ID        variable name (default: tileset)
+  -p PALETTE, --palette PALETTE
+                        palette file (default to builtin palette)
+  -a, --asm             ASM output (default: C header)
+  --aplib               APLIB compressed
+  -z, --zx0             ZX0 compressed
+
+Copyright (C) 2024 Pedro de Medeiros <pedro.medeiros@gmail.com>
+```
+Binary `apultra` and `zx0` must be found in the PATH system variable for compression
+to work.
+
 # png2tiles.py
 
 This is a new version of `png2tiles.py` that changes functionality considerably when
