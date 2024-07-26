@@ -1,3 +1,18 @@
+# png2palette.py
+This script generates a MSX2 palette from RGB values in the png. Here is the help message:
+```
+usage: png2palette.py [-h] [--version] image
+
+Generate a MSX2 RGB9 Palette from 16 colors PNG file
+
+positional arguments:
+  image       16 colors PNG image to process
+
+options:
+  -h, --help  show this help message and exit
+  --version   show program's version number and exit
+```
+
 # png2sc5.py
 
 This is a new version of `png2scr.py` that converts image to SCREEN 5 (MSX2). Here
@@ -19,8 +34,6 @@ options:
   -a, --asm             ASM output (default: C header)
   --aplib               APLIB compressed
   -z, --zx0             ZX0 compressed
-
-Copyright (C) 2024 Pedro de Medeiros <pedro.medeiros@gmail.com>
 ```
 Binary `apultra` and `zx0` must be found in the PATH system variable for compression
 to work.
