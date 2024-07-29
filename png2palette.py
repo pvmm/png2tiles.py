@@ -190,24 +190,25 @@ def main():
     if len(png16palette) > 16:
         parser.error("more than 16 colors")
     elif len(png16palette) < 16:
-        print(f"# warning: less than 16 colors found ({len(png16palette)}).")
+        print(f"# warning: less than 16 colors (only {len(png16palette)} found)")
 
     rgb9palette = []
-    for (r1,g1,b1) in png16palette:
+    for r1,g1,b1 in png16palette:
         tmp = MAX_VALUE
-        #print(f"testing ({r1},{g1},{b1})...")
+        #print(f"testing ({r1}, {g1}, {b1})...")
         for r2,g2,b2 in MSX2_RBG9_PALETTE:
             d = sqrt((r1-r2)**2 + (g1-g2)**2 + (b1-b2)**2)
             if min(d, tmp) < tmp:
-                #print(f"replace {tmp} with {d} @ ({r2},{g2},{b2})")
+                #print(f"replace {tmp} with {d} @ ({r2}, {g2}, {b2})")
                 tmp = d
                 rgb = r2,g2,b2
-        if tmp < MAX_VALUE and not MSX2_RBG9_PALETTE[rgb] in rgb9palette:
-            #print(f"@distance {tmp:.8}: found {rgb}: {MSX2_RBG9_PALETTE[rgb]}")
-            rgb9palette.append(MSX2_RBG9_PALETTE[rgb])
+        if tmp == MAX_VALUE:
+            print(f"# warning: 24-bit ({r1}, {g1}, {b1}) not found")
+        elif MSX2_RBG9_PALETTE[rgb] in rgb9palette:
+            print(f"# warning: 24-bit ({r1}, {g1}, {b1}) replaced by similar color ({rgb})")
         else:
-            print(f"# warning: 24-bit ({r1},{g1},{b1}) not found:")
-
+            #print(f"@distance {tmp:.8}: found ({rgb}): {MSX2_RBG9_PALETTE[rgb]}")
+            rgb9palette.append(MSX2_RBG9_PALETTE[rgb])
 
     # Print tuple data
     print("\npalette = [")
